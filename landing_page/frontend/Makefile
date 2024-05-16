@@ -1,26 +1,18 @@
-# Define the directory where your site will be served
-SITE_DIR = /usr/local/var/www
+# Build the Next.js application
+build:
+	npm run build
 
-# Define the main configuration file for nginx
-NGINX_CONF = /usr/local/etc/nginx/nginx.conf
+# Start the Next.js application in production mode
+serve:
+	npm run start
 
-# Starts the development server
 start:
 	npm run dev
 
-# Builds the project and copies files to the Nginx directory
-build:
-	npm run build
-	cp -R dist/* $(SITE_DIR)
-
-# Starts Nginx to serve the website
-serve:
-	sudo nginx -c $(NGINX_CONF)
-
-# Stops Nginx
+# Define a simple stop command if you're using pm2 or similar
 stop:
-	sudo nginx -s stop
+	pm2 stop all
 
-# Reloads Nginx configuration without downtime
-reload:
-	sudo nginx -s reload
+killport:
+	killport 3000
+
